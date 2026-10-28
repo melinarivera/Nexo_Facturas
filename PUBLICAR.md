@@ -35,4 +35,7 @@ Tecnologías: HTML, CSS y JavaScript; persistencia local y pruebas con Node.js. 
 
 ## Estado
 
-Configuración preparada localmente. Pendiente de identificar el repositorio, obtener acceso y verificar la publicación. Todavía no existe una URL pública de GitHub Pages confirmada para esta entrega.
+Publicada con GitHub Pages (fuente: GitHub Actions) en https://melinarivera.github.io/Nexo_Facturas/
+
+Enlazada desde el portafolio (https://melinarivera.github.io/MR_Portafolio/) y desde la página de servicios.
+El repositorio debe seguir siendo público: con una cuenta gratuita, GitHub Pages no publica repositorios privados.
