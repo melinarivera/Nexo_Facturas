@@ -1,0 +1,43 @@
+name: Publicar demo Nexo en GitHub Pages
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nexo-pages
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Comprobar sintaxis
+        run: node --check dist/app.js
+      - name: Comprobar circuito de facturación
+        run: node --test tests/flow.test.cjs
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+      - name: Preparar sitio estático
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar página
+        id: deployment
+        uses: actions/deploy-pages@v4
